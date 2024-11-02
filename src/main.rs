@@ -1,7 +1,7 @@
 use std::env;
 
 use backend::routes::*;
-use rocket::{figment::value, launch, routes};
+use rocket::{launch, routes};
 
 mod algorithms;
 mod backend;
