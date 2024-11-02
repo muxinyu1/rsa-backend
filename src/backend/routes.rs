@@ -5,7 +5,7 @@ use rocket::{get, post, serde::json::Json};
 
 use super::models::*;
 
-#[get("/keygen/<len>")]
+#[get("/api/keygen/<len>")]
 pub fn key_gen(len: usize) -> Json<KeyGenRsp> {
     let start = SystemTime::now();
     let (public_key, private_key) = rsa::gen_keys(len);
@@ -19,7 +19,7 @@ pub fn key_gen(len: usize) -> Json<KeyGenRsp> {
     })
 }
 
-#[post("/encrypt", data = "<encrypt_req>")]
+#[post("/api/encrypt", data = "<encrypt_req>")]
 pub fn encrypt(encrypt_req: Json<EncryptReq>) -> Json<EncryptRsp> {
     let start = SystemTime::now();
     let public_key = BigInt::from_hex(&encrypt_req.public_key).unwrap();
@@ -32,7 +32,7 @@ pub fn encrypt(encrypt_req: Json<EncryptReq>) -> Json<EncryptRsp> {
     })
 }
 
-#[post("/decrypt", data = "<decrypt_req>")]
+#[post("/api/decrypt", data = "<decrypt_req>")]
 pub fn decrypt(decrypt_req: Json<DecryptReq>) -> Json<DecryptRsp> {
     let start = SystemTime::now();
     let public_key = BigInt::from_hex(&decrypt_req.public_key).unwrap();
@@ -46,7 +46,7 @@ pub fn decrypt(decrypt_req: Json<DecryptReq>) -> Json<DecryptRsp> {
     })
 }
 
-#[post("/sign", data = "<sign_req>")]
+#[post("/api/sign", data = "<sign_req>")]
 pub fn sign(sign_req: Json<SignReq>) -> Json<SignRsp> {
     let start = SystemTime::now();
     let public_key = BigInt::from_hex(&sign_req.public_key).unwrap();
@@ -60,7 +60,7 @@ pub fn sign(sign_req: Json<SignReq>) -> Json<SignRsp> {
     })
 }
 
-#[post("/verify_sign", data = "<verify_sign_req>")]
+#[post("/api/verify_sign", data = "<verify_sign_req>")]
 pub fn verify_sign(verify_sign_req: Json<VerifySignReq>) -> Json<VerifySignRsp> {
     let start = SystemTime::now();
     let public_key = BigInt::from_hex(&verify_sign_req.public_key).unwrap();
