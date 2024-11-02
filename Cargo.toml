@@ -1,0 +1,10 @@
+[package]
+name = "rsa-rust-cpp"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lazy_static = "1.4"
+rand = "0.8.5"
+rocket = { version = "0.5.1", features = ["json"] }
+serde = {version = "1.0.214", features = ["derive"]}
