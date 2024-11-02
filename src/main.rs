@@ -2,6 +2,7 @@ use std::env;
 
 use backend::routes::*;
 use rocket::{launch, routes};
+use rocket_cors::{AllowedOrigins, Cors, CorsOptions};
 
 mod algorithms;
 mod backend;
@@ -20,7 +21,9 @@ fn rocket() -> _ {
         },
         Err(_) => 8080,
     };
+    let cors = CorsOptions::default().allowed_origins(AllowedOrigins::all());
     rocket::build()
+        .attach(cors.to_cors().unwrap())
         .mount("/", routes![key_gen, encrypt, decrypt, sign, verify_sign])
         .configure(rocket::Config {
             port,
