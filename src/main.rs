@@ -24,7 +24,7 @@ fn rocket() -> _ {
         .mount("/", routes![key_gen, encrypt, decrypt, sign, verify_sign])
         .configure(rocket::Config {
             port,
-            address: "127.0.0.1".parse().unwrap(),
+            address: "0.0.0.0".parse().unwrap(),
             ..rocket::Config::default()
         })
 }
